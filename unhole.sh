@@ -8,7 +8,7 @@
 #Extended version from https://unix.stackexchange.com/a/198161/64403
 #Pass -s or --stay, to stay on current dir without `cd`
 #Pass -c or --clear, to delete source .tar or .deb file. It will not clear if failed to extract.
-#Not support for regex such as *.tar.xz, which only working on right-most single file at one time.
+#Single script not support for regex such as *.tar.xz, which only working on right-most single file at one time. But you can use custom bash function unhole_all[_c] below to make it achieve the goal.
 #Even though parse ls is not good practice but normal filename shouldn't has problem, also the ls only use for speed up when many existing destination directory has same name, it still works even though count wrong(just need to loop more).
 
 #Add alias and custom function in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash)
