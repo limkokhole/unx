@@ -1,5 +1,5 @@
 # unhole
-Automatically mkdir to extract .tar.gz, .tar.xz, .deb, ls files, cd, rename incrementallly, and with regex *
+Automatically mkdir to extract .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, rename incrementallly, and with regex *
 
 This bash script to combine all steps (mkdir, tar, ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, rename/update new destination directory with nice incremental number without accidentally overwritten. Also able to work in regex * looping with multiple different paths while also able to ls.)
 
