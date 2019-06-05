@@ -5,7 +5,7 @@ This bash script combine all steps (mkdir, tar, ar x, cd before extract(if .deb)
 
 This bash script contains section "TEMPLATE_OF_BASH_ALIASES" block which let you modify and copy/paste to ~/.bash_aliases
 
-Support .tar.gz but not .gz , which gunzip extract single file only.
+Support .tar.gz but not .gz , which gunzip decompress single file only.
 
 ## Demonstration video (Click image to play at YouTube): ##
 
