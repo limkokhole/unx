@@ -1,7 +1,7 @@
 #!/bin/bash
 #usage:
 #alias_name [-c|-s] myArchive.tar.gz
-#alias_name [-c|-s] myArchive.gz
+#alias_name [-c|-s] myArchive.tgz
 #alias_name [-c|-s] myArchive.tar
 
 #hole: 
