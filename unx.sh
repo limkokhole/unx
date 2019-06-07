@@ -67,7 +67,7 @@ for (( j=0; j<argc; j++ )); do
 		if [[ -z "$f_arg" ]]; then echo -e "\033[31;1mEmpty filename. Abort."; tput sgr0; continue;
 		fi
 
-		if [[ "$0" = /* ]]; then #absolute path can't add $PWD
+		if [[ "$f_arg" = /* ]]; then #absolute path can't add $PWD
 			f_arg="$(readlink -f "$f_arg" )" #absolute path, rf: https://stackoverflow.com/a/11403912/1074998
 		else #relative path
 			f_arg="$(readlink -f "$PWD"/"$f_arg" )" #to support relative path arg, expand it to full path first
