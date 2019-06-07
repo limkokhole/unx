@@ -195,7 +195,7 @@ for (( j=0; j<argc; j++ )); do
 			fi
 
 			if [ "$verbose_arg" == true ]; then
-				if [[ "$trim_ext" == "gz" ]]; then #shouldn't ls .gz with ../ since it's single file
+				if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #shouldn't ls .gz with ../ since it's single file
 					echo -e "\n\033[34;1m""$(readlink -f ""$(dirname $fileName)"/../")"'/:'; tput sgr0;
 					ls -larthiF --context --color "$(dirname $fileName)"/
 				else
@@ -207,7 +207,7 @@ for (( j=0; j<argc; j++ )); do
 
 			#deprecated: https://superuser.com/questions/186272/check-if-any-of-the-parameters-to-a-bash-script-match-a-string
 		
-			if [[ "$trim_ext" == "gz" ]]; then
+			if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then
 				echo -e "\n\033[36;1m""$(readlink -f "$fileName")"' [.gz]:'; tput sgr0;
 				ls -larthiF --context --color "$fileName"
 				cd "$orig_pwd" #shouldn't save cd path if .gz since it's single file
