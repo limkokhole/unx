@@ -15,7 +15,6 @@
 #
 #Regex *, relative path, full path is all supported !
 #
-#Even though parse ls is not good practice but normal filename shouldn't has problem, also the ls only use for speed up when many existing destination directory has same name, it still works even though count wrong(just need to loop more).
 
 #Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash)
 #E.g:
@@ -103,6 +102,7 @@ for (( j=0; j<argc; j++ )); do
 			fi
 			#echo -e "\033[33;1m$fileName"'/ created, untar...'; tput sgr0;
 		else
+			##Even though parse ls is not good practice but normal filename shouldn't has problem, also the ls only use for speed up when many existing destination directory has same name, it still works even though count wrong(just need to loop more).
 			w=$(ls -1q | egrep "$fileName"_[0-9]+ | wc -l)
 			if [ -e "$fileName"_1 ]; then ((w=w-1)); fi #exclude existing fileName_1 bcoz this is not generated from this script, to prevent if _1 and _2 exists then increment +2 to create _4 which is wrong.
 			if [ $w -eq 0 ]; then w=2; else ((w=w+2)); fi #1 is missing and start from 2, so always need increment 2
