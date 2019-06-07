@@ -86,14 +86,15 @@ for (( j=0; j<argc; j++ )); do
 
 		#handle the case of archive.tar.gz
 		trailingExtension="${fileName##*.}"
-		#if [[ ( "$trailingExtension" == "tar" ) || ( "$trailingExtension" == "deb" ) ]]  
+		is_tar=false
 		if [[ ( "$trailingExtension" == "tar" ) ]]  
 		then
+		    is_tar=true
 		    fileName="${fileName%.*}"  #remove trailing tar.
 		fi
 
 		if [ ! -e "$fileName" ]; then
-			if [[ "$trim_ext" != "gz" ]]; then #.gz is >single file, no need prepare file
+			if [[ ( "$trim_ext" != "gz" ) || ( "$is_tar" == true) ]]; then #.gz is >single file, no need prepare file
 				mkdir "$fileName"
 			fi
 			#echo -e "\033[33;1m$fileName"'/ created, untar...'; tput sgr0;
@@ -105,13 +106,18 @@ for (( j=0; j<argc; j++ )); do
 				((w=w+1))
 			done;
 			fileName="$fileName"_"$w"
-			if [[ "$trim_ext" != "gz" ]]; then #.gz is >single file, no need prepare file
+			if [[ ( "$trim_ext" != "gz" ) || ( "$is_tar" == true) ]]; then #.gz is >single file, no need prepare file
+			#if [[ "$trim_ext" == "gz" ]]; then 
 				mkdir "$fileName"
 			fi
 			#echo -e "\033[33;1m$fileName"'/ created, untar...'; tput sgr0;
 		fi
 
 		#the beuty of rmdir is will only remove empty dir, useful here to avoid harmful rm_r command or noise rm_i
+
+		if [ "$verbose_arg" == true ]; then
+			echo -e "\n\033[36;1m.Trying $f_arg ..."; tput sgr0;
+		fi
 
 		if [[ "$trim_ext" == "deb" ]]; then #must operate after cd, put in 1st if clause
 
@@ -134,7 +140,7 @@ for (( j=0; j<argc; j++ )); do
 
 		else
 			#https://stackoverflow.com/a/14138301/1074998 (shopt nocasematch), https://stackoverflow.com/questions/1728683/case-insensitive-comparison-of-strings-in-shell-script#comment17032645_1728814 (must use [[ instead of [)
-			if [[ "$trim_ext" == "gz" ]]; then
+			if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #is_tar will true of .tar.gz, use tar instead of gzip
 				gzip -cd "$f_arg" > "$fileName" || { 
 					echo -e "\033[31;1mUn-gzip failed. Abort."; tput sgr0;
 					rm "$fileName"; #test case: touch dummy file, then try to untar it
@@ -160,8 +166,8 @@ for (( j=0; j<argc; j++ )); do
 					fi
 					continue;
 				}
-			else
-				tar -xf "$f_arg" --strip-components=0 -C "$fileName" 2>/dev/null || {
+			else	
+				tar -xf "$f_arg" --strip-components=0 -C "$fileName" || {
 					if [ "$verbose_arg" == true ]; then
 						echo -e "\033[31;1mUntar $fileName failed. Abort."; tput sgr0;
 					fi
@@ -215,6 +221,6 @@ if [ "$stay_arg" != true ]; then
 		cd  "$success_cd_path" #if empty will no effect
 	fi
 fi
-#echo  #konsole has bug which doesn't reset immediately(unlees move backward cursor or Enter on new prompt) on return need extra echo to solve this.
+echo  #konsole has bug which doesn't reset immediately(unlees move backward cursor or Enter on new prompt) on return need extra echo to solve this.
 shopt -u nocasematch
 
