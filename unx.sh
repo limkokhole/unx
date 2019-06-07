@@ -20,7 +20,7 @@
 #E.g:
 <<"TEMPLATE_OF_BASH_ALIASES"
 #Need source '.', rf: https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
-#Change the path below to your script path, this alias also used by function below: 
+#Change the path below to your script path: 
 alias unx='. /home/xiaobai/note/sh/unx/unx.sh' 
 TEMPLATE_OF_BASH_ALIASES
 #Since need source, then also need return/continue instead of exist in whole script, rf: https://unix.stackexchange.com/questions/460099/how-can-i-skip-the-rest-of-a-script-without-exiting-the-invoking-shell-when-sou
@@ -34,7 +34,7 @@ f_arg=
 
 argc=$#
 argv=("$@")
-file_argv=0
+#file_argv=0
 for (( j=0; j<argc; j++ )); do
 	case ${argv[j]} in
 	  -s|--stay) stay_arg=true;;
@@ -44,7 +44,7 @@ for (( j=0; j<argc; j++ )); do
 	  -sv|-vs) stay_arg=true; verbose_arg=true;;
 	  -vs|-sv) clear_arg=true; verbose_arg=true;;
 	  -scv|-svc|-csv|-cvs|-vsc|-vcs) stay_arg=true; clear_arg=true; verbose_arg=true;;
-	  *) ((file_argv="$file_argv"+1))
+	  #*) ((file_argv="$file_argv"+1)) #comment out since count unsued
 	esac;	
 done
 
