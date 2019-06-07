@@ -44,7 +44,7 @@ for (( j=0; j<argc; j++ )); do
 	  -sv|-vs) stay_arg=true; verbose_arg=true;;
 	  -vs|-sv) clear_arg=true; verbose_arg=true;;
 	  -scv|-svc|-csv|-cvs|-vsc|-vcs) stay_arg=true; clear_arg=true; verbose_arg=true;;
-	  #*) ((file_argv="$file_argv"+1)) #comment out since count unsued
+	  #*) ((file_argv="$file_argv"+1)) #comment out since count unused
 	esac;	
 done
 
