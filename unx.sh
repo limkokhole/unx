@@ -167,7 +167,7 @@ for (( j=0; j<argc; j++ )); do
 					continue;
 				}
 			else	
-				tar -xf "$f_arg" --strip-components=0 -C "$fileName" || {
+				tar -xf "$f_arg" --strip-components=0 -C "$fileName" 2>/dev/null || {
 					if [ "$verbose_arg" == true ]; then
 						echo -e "\033[31;1mUntar $fileName failed. Abort."; tput sgr0;
 					fi
