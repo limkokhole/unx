@@ -7,21 +7,20 @@ This bash script contains section "TEMPLATE_OF_BASH_ALIASES" block which let you
 
 Support .tar.gz but not .gz , which gunzip decompress single file only.
 
-## Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash)
-## Modify the script path to yours.
+### Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash). Modify the script path to yours.
     alias unhole='. /home/xiaobai/note/sh/unhole/unhole.sh' 
 
-## Usage:
+### Usage:
     unhole [-c|-s|-v] myArchive.tar.gz
     unhole [-c|-s|-v] myArchive.tgz
     unhole [-c|-s|-v] myArchive.tar
 
-## Options Explanation:
+### Options Explanation:
     Pass -s or --stay, the default is move to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted.
     Pass -c or --clear, to delete source .tar or .deb file. It will not clear if failed to extract.
     Pass -v or --verbose, to list parent directory of destination directory/file on progress.
 
-## Option example:
+### Option example:
     unhole myArchive.tar
     unhole myArchive.tar -scv
     unhole *
@@ -34,7 +33,7 @@ Support .tar.gz but not .gz , which gunzip decompress single file only.
     unhole *.gz -sc
     unhole *.gz -scv
 
-## Demonstration video (Click image to play at YouTube): ##
+### Demonstration video (Click image to play at YouTube): ##
 
 [![watch in youtube](https://i.ytimg.com/vi/nd5U7gwb5w8/hqdefault.jpg)](https://www.youtube.com/watch?v=nd5U7gwb5w8 "unhole")
 
