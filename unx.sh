@@ -22,7 +22,7 @@
 <<"TEMPLATE_OF_BASH_ALIASES"
 #Need source '.', rf: https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
 #Change the path below to your script path, this alias also used by function below: 
-alias unhole='. /home/xiaobai/note/sh/unhole/unhole.sh' 
+alias unx='. /home/xiaobai/note/sh/unx/unx.sh' 
 TEMPLATE_OF_BASH_ALIASES
 #Since need source, then also need return/continue instead of exist in whole script, rf: https://unix.stackexchange.com/questions/460099/how-can-i-skip-the-rest-of-a-script-without-exiting-the-invoking-shell-when-sou
 

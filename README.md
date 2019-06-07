@@ -1,15 +1,15 @@
-# unhole
-Automatically mkdir to extract .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, remove source file, rename incrementally, and with regex *
+# unx
+Automatically mkdir to extracts .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, remove source file, rename incrementally, and with regex *
 
-This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, remove source file if -c, rename/update new destination directory with nice incremental number without worry accidentally overwritten. Also able to work in regex * looping with multiple different paths while also able to ls.)
+This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, remove source file if -c, rename/update new destination directory with default basename_ PLUS pretty incremental number without worry accidentally overwritten. Also able to work in regex * looping with multiple different paths while also able to ls.)
 
 ### Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash). Modify the script path to yours.
-    alias unhole='. /home/xiaobai/note/sh/unhole/unhole.sh' 
+    alias unx='. /home/xiaobai/note/sh/unx/unx.sh' 
 
 ### Usage:
-    unhole [-c|-s|-v] myArchive.tar.gz
-    unhole [-c|-s|-v] myArchive.tgz
-    unhole [-c|-s|-v] myArchive.tar
+    unx [-c|-s|-v] myArchive.tar.gz
+    unx [-c|-s|-v] myArchive.tgz
+    unx [-c|-s|-v] myArchive.tar
 
 ### Options Explanation:
     Pass -s or --stay, the default is move to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted.
@@ -17,22 +17,22 @@ This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extrac
     Pass -v or --verbose, to list parent directory of destination directory/file on progress.
 
 ### Options example (Basically means every possible combination of -c|-s|-v, ../full path, regex *):
-    unhole myArchive.tar
-    unhole /home/user/myArchive.tar
-    unhole myArchive.tar -scv
-    unhole *
-    unhole ../*
-    unhole ../* -c
-    unhole ../* -s
-    unhole ../*.xz -s
-    unhole ../*.deb -s
-    unhole ../*.zip -s
-    unhole ../*.gz -s
-    unhole *.gz -s
-    unhole *.tar.gz -sc
-    unhole *.gz -scv
+    unx myArchive.tar
+    unx /home/user/myArchive.tar
+    unx myArchive.tar -scv
+    unx *
+    unx ../*
+    unx ../* -c
+    unx ../* -s
+    unx ../*.xz -s
+    unx ../*.deb -s
+    unx ../*.zip -s
+    unx ../*.gz -s
+    unx *.gz -s
+    unx *.tar.gz -sc
+    unx *.gz -scv
 
 ### Demonstration video (Click image to play at YouTube): ##
 
-[![watch in youtube](https://i.ytimg.com/vi/nd5U7gwb5w8/hqdefault.jpg)](https://www.youtube.com/watch?v=nd5U7gwb5w8 "unhole")
+[![watch in youtube](https://i.ytimg.com/vi/nd5U7gwb5w8/hqdefault.jpg)](https://www.youtube.com/watch?v=nd5U7gwb5w8 "unx")
 
