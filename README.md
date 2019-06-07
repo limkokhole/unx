@@ -22,6 +22,7 @@ Support .tar.gz but not .gz , which gunzip decompress single file only.
 
 ### Option example:
     unhole myArchive.tar
+    unhole /home/user/myArchive.tar
     unhole myArchive.tar -scv
     unhole *
     unhole ../*
