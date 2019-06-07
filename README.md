@@ -12,7 +12,7 @@ This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extrac
     unx [-c|-s|-v] myArchive.tar
 
 ### Options Explanation:
-    Pass -s or --stay, the default is move to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted.
+    Pass -s or --stay, the default is `cd` to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted. Note that it doesn't means stay on current directory when on progress since `ar x` requires `cd`, but it means cd back to original directory on complete.
     Pass -c or --clear, to delete source .tar or .deb file. It will not clear if failed to extract.
     Pass -v or --verbose, to list parent directory of destination directory/file on progress.
 
