@@ -62,7 +62,7 @@ for (( j=0; j<argc; j++ )); do
 	  -scv|-svc|-csv|-cvs|-vsc|-vcs) :;;
 	  *) f_arg="${argv[j]}"; 
 
-		#empty string, happen if run when no filename, or when call custom function accidentally pass -c (only failed at that one onlyand continue next loop)
+		#empty string, happen if run when no filename 
 		if [[ -z "$f_arg" ]]; then echo -e "\033[31;1mEmpty filename. Abort."; tput sgr0; continue;
 		fi
 
@@ -123,7 +123,7 @@ for (( j=0; j<argc; j++ )); do
 			echo -e "\n\033[36;1m.Trying $f_arg ..."; tput sgr0;
 		fi
 
-		if [[ "$trim_ext" == "deb" ]]; then #must operate after cd, put in 1st if clause
+		if [[ "$trim_ext" == "deb" ]]; then #must operate ar x after cd, put in 1st if clause
 
 			if [ "$verbose_arg" == true ]; then
 				echo -e "\n\033[34;1m."'/:'; tput sgr0;
@@ -134,7 +134,7 @@ for (( j=0; j<argc; j++ )); do
 			ar x "$f_arg" #use full path to support relative path arg 
 
 			if [ "$clear_arg" == true ]; then
-				rm "$f_arg" #[UPDATE] use full path tosupport relative path arg 
+				rm "$f_arg" #[UPDATE] use full path to support relative path arg 
 				echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
 			fi
 
@@ -187,7 +187,7 @@ for (( j=0; j<argc; j++ )); do
 				}
 			fi
 
-			touch "$fileName" #by default untar keep timestamp with source file which is strange not able to sort by ls
+			touch "$fileName" #by default untar keep timestamp with source file which is strange not able to do ls sort by time
 
 			if [ "$clear_arg" == true ]; then
 				rm "$f_arg"
@@ -204,8 +204,6 @@ for (( j=0; j<argc; j++ )); do
 				fi
 				
 			fi
-
-			#deprecated: https://superuser.com/questions/186272/check-if-any-of-the-parameters-to-a-bash-script-match-a-string
 		
 			if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then
 				echo -e "\n\033[36;1m""$(readlink -f "$fileName")"' [.gz]:'; tput sgr0;
@@ -225,6 +223,6 @@ if [ "$stay_arg" != true ]; then
 		cd  "$success_cd_path" #if empty will no effect
 	fi
 fi
-echo  #konsole has bug which doesn't reset immediately(unlees move backward cursor or Enter on new prompt) on return need extra echo to solve this.
+echo  #konsole has bug which doesn't reset color immediately(unlees move backward cursor or Enter on new prompt) on return need extra echo to solve this.
 shopt -u nocasematch
 
