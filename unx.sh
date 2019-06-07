@@ -146,7 +146,7 @@ for (( j=0; j<argc; j++ )); do
 			#https://stackoverflow.com/a/14138301/1074998 (shopt nocasematch), https://stackoverflow.com/questions/1728683/case-insensitive-comparison-of-strings-in-shell-script#comment17032645_1728814 (must use [[ instead of [)
 			if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #is_tar will true of .tar.gz, use tar instead of gzip
 				gzip -cd "$f_arg" > "$fileName" || { 
-					echo -e "\033[31;1mUn-gzip failed. Abort."; tput sgr0;
+					echo -e "\033[31;1mUn-gzip "$f_arg" failed. Abort."; tput sgr0;
 					rm "$fileName"; #test case: touch dummy file, then try to untar it
 					if [ -e "$fileName" ]; then
 						echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
@@ -159,7 +159,7 @@ for (( j=0; j<argc; j++ )); do
 				}
 			elif [[ "$trim_ext" == "zip" ]]; then
 				unzip "$f_arg" -d "$fileName" >/dev/null || { 
-					echo -e "\033[31;1mUnzip failed. Abort."; tput sgr0;
+					echo -e "\033[31;1mUnzip "$f_arg" failed. Abort."; tput sgr0;
 					rmdir "$fileName"; #test case: touch dummy file, then try to untar it
 					if [ -e "$fileName" ]; then
 						echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
@@ -173,7 +173,7 @@ for (( j=0; j<argc; j++ )); do
 			else	
 				tar -xf "$f_arg" --strip-components=0 -C "$fileName" 2>/dev/null || {
 					if [ "$verbose_arg" == true ]; then
-						echo -e "\033[31;1mUntar $fileName failed. Abort."; tput sgr0;
+						echo -e "\033[31;1mUntar "$f_arg" failed. Abort."; tput sgr0;
 					fi
 					rmdir "$fileName"; #test case: touch dummy file, then try to untar it
 					if [ -e "$fileName" ]; then
