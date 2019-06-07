@@ -111,7 +111,6 @@ for (( j=0; j<argc; j++ )); do
 			done;
 			fileName="$fileName"_"$w"
 			if [[ ( "$trim_ext" != "gz" ) || ( "$is_tar" == true) ]]; then #.gz is >single file, no need prepare file
-			#if [[ "$trim_ext" == "gz" ]]; then 
 				mkdir "$fileName"
 			fi
 			#echo -e "\033[33;1m$fileName"'/ created, untar...'; tput sgr0;
