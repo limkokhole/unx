@@ -16,6 +16,24 @@ Support .tar.gz but not .gz , which gunzip decompress single file only.
     unhole [-c|-s|-v] myArchive.tgz
     unhole [-c|-s|-v] myArchive.tar
 
+## Options Explanation:
+    Pass -s or --stay, the default is move to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted.
+    Pass -c or --clear, to delete source .tar or .deb file. It will not clear if failed to extract.
+    Pass -v or --verbose, to list parent directory of destination directory/file on progress.
+
+## Option example:
+    unhole myArchive.tar
+    unhole myArchive.tar -scv
+    unhole *
+    unhole ../*
+    unhole ../* -c
+    unhole ../* -s
+    unhole ../*.xz -s
+    unhole ../*.deb -s
+    unhole *.gz -s
+    unhole *.gz -sc
+    unhole *.gz -scv
+
 ## Demonstration video (Click image to play at YouTube): ##
 
 [![watch in youtube](https://i.ytimg.com/vi/nd5U7gwb5w8/hqdefault.jpg)](https://www.youtube.com/watch?v=nd5U7gwb5w8 "unhole")

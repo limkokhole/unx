@@ -13,6 +13,8 @@
 #
 #You can also combine to be -sv, svc, and so on.
 #
+#Regex *, relative path, full path is all supported !
+#
 #Even though parse ls is not good practice but normal filename shouldn't has problem, also the ls only use for speed up when many existing destination directory has same name, it still works even though count wrong(just need to loop more).
 
 #Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash)
