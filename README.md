@@ -1,7 +1,7 @@
 # unx
 Automatically mkdir to extracts .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, remove source file, rename incrementally, touch, and with regex *
 
-This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, remove source file if -c, rename/update new destination directory with default basename_ PLUS pretty incremental number without worry accidentally overwritten. Touch file/directory to easier lort by time later. Also able to work in regex * looping with multiple different paths while also able to ls.)
+This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, remove source file if -c, rename/update new destination directory with default basename_ PLUS pretty incremental number without worry accidentally overwritten. Touch file/directory to easier sort by time later. Also able to work in regex * looping with multiple different paths while also able to ls.)
 
 ### Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash). Modify the script path to yours.
     alias unx='. /home/xiaobai/note/sh/unx/unx.sh' 
