@@ -34,5 +34,5 @@ This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extrac
 
 ### Demonstration video (Click image to play at YouTube): ##
 
-[![watch in youtube](https://i.ytimg.com/vi/nd5U7gwb5w8/hqdefault.jpg)](https://www.youtube.com/watch?v=nd5U7gwb5w8 "unx")
+[![watch in youtube](https://i.ytimg.com/vi/hnCHUxaRUIk/hqdefault.jpg)](https://www.youtube.com/watch?v=hnCHUxaRUIk "unx")
 
