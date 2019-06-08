@@ -85,7 +85,10 @@ for (( j=0; j<argc; j++ )); do
 				echo -e "\033[36;1mSkipped directory ($f_arg).";  tput sgr0; 
 			fi
 			continue;
+		#e.g. a fifo, but can be other type as long as not file type
+		elif [ ! -f "$f_arg" ]; then echo -e "\033[31;1mProvided filename $f_arg is not a file type. Abort."; tput sgr0; continue;
 		fi
+
 
 		#handle the case of archive.tar.gz
 		trailingExtension="${fileName##*.}"
