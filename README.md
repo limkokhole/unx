@@ -1,9 +1,11 @@
 # unx
-Automatically mkdir to extracts .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, remove source file, rename incrementally, touch, and with regex *
+Automatically mkdir to eXtracts .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, ls files, cd, remove source file, rename incrementally, touch, and with regex *
 
-This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color, remove source file if -c, rename/update new destination directory with default basename_ PLUS pretty incremental number without worry accidentally overwritten. Touch file/directory to easier sort by time later. Also able to work in regex * looping with multiple different paths while also able to ls.)
+This bash script combines all steps (mkdir, unzip/tar/gzip/ar x, cd before extract(if .deb) or after extract, which also performs ls -larthiF --context --color (sort by time), remove source file if -c, rename/update new destination directory with default basename_ PLUS pretty incremental number without worry accidentally overwritten(similar to how file explorer do). Touch file/directory to easier sort by time later. Also able to work in regex * looping with multiple different paths while also able to ls.)
 
-### Add alias in ~/.bash_aliases (don't forget source ~/.bash_aliases if want to test without restart bash). Modify the script path to yours.
+The name "unx" inspired by UNp, UN-tar, UNzip and eXtracts.
+
+### Add alias in ~/.bash_aliases (don't forget run `source ~/.bash_aliases` if want to test without restart bash). Modify the script path to yours.
     alias unx='. /home/xiaobai/note/sh/unx/unx.sh' 
 
 ### Usage:
@@ -14,7 +16,7 @@ This bash script combine all steps (mkdir, unzip/tar/gzip/ar x, cd before extrac
 ### Options Explanation:
     Pass -s or --stay, the default is `cd` to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted. Note that it doesn't means stay on current directory when on progress since `ar x` requires `cd`, but it means cd back to original directory on complete.
     Pass -c or --clear, to delete source file such as .tar/.zip/.deb file. It will not clear if failed to extract.
-    Pass -v or --verbose, to list parent directory of destination directory/file on progress.
+    Pass -v or --verbose, to list parent directory of destination directory/file on progress. Also included log such as which directory is skipped and which file is trying.
 
 ### Options example (Basically means every possible combination of -c|-s|-v, ../full path, regex *):
     unx myArchive.tar
