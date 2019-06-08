@@ -75,6 +75,19 @@ for (( j=0; j<argc; j++ )); do
 		trim_ext="${f_arg##*.}"
 		if [ "$trim_ext" == "deb" ]; then
 			fileName="$f_arg" #.deb
+		elif [ "$trim_ext" == "iso" ]; then #safe guard bcoz unlikely user want to extract iso
+			#https://stackoverflow.com/a/1885534/1074998
+			if [ "$clear_arg" == true ]; then
+				echo -e "\033[31;1m "$f_arg" file will be deleted after extracted because of -c option."; 
+				echo -e "\033[31;1m Are you sure you want to extract iso? "; 
+				read -p "[y/n] " -n 1 -r
+				echo    # (optional) move to a new line
+				if [[ $REPLY =~ ^[Yy]$ ]]; then
+					tput sgr0; #continue normal flow to extract iso
+				else
+					echo -e "\033[31;1mIso $f_arg Abort."; tput sgr0; continue;
+				fi
+			fi
 		else
 			fileName="${f_arg%.*}" #extracted filename
 		fi
@@ -172,6 +185,19 @@ for (( j=0; j<argc; j++ )); do
 					fi
 					continue;
 				}
+			elif [[ "$trim_ext" == "iso" ]]; then
+				7z x "$f_arg" -o"$fileName" >/dev/null || { 
+					echo -e "\033[31;1mExtract iso "$f_arg" failed. Abort."; tput sgr0;
+					rmdir "$fileName"; #test case: touch dummy file, then try to untar it
+					if [ -e "$fileName" ]; then
+						echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
+					else
+						if [ "$verbose_arg" == true ]; then
+							echo -e "\033[33;1m$fileName"'/ removed.'; tput sgr0;
+						fi
+					fi
+					continue;
+				}
 			else	
 				tar -xf "$f_arg" --strip-components=0 -C "$fileName" 2>/dev/null || {
 					if [ "$verbose_arg" == true ]; then
@@ -191,36 +217,39 @@ for (( j=0; j<argc; j++ )); do
 
 			touch "$fileName" #by default untar keep timestamp with source file which is strange not able to do ls sort by time
 
-			if [ "$clear_arg" == true ]; then
-				if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #dest is a file
-					if [ -s "$fileName" ]; then #only delete file if dest file size greater than 0 to prevent tar xf .iso still return status 0 bug.
+			if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #dest is a file
+				if [ -s "$fileName" ]; then #only delete file if dest file size greater than 0 to prevent tar xf .iso still return status 0 bug. [UPDATE] always check to prevent empty trash dir/file
+					if [ "$clear_arg" == true ]; then
 						#echo got size
 						rm "$f_arg"
 						echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
-					else
-						#echo no size
-						echo -e "\n\033[33;1m$f_arg will ignore due to empty "$fileName" to prevent extract failure."; tput sgr0;
-						#will not rm any single file.
-						continue;
+					#else normal success flow
 					fi
-				else #dest is a directory
-					if find "$fileName" -mindepth 1 | read; then #https://superuser.com/a/667100/248836
+				else
+					#echo no size
+					echo -e "\n\033[33;1m$f_arg will ignore due to empty "$fileName" to prevent extract failure."; tput sgr0;
+					#will not rm any single file.
+					continue;
+				fi
+			else #dest is a directory
+				if find "$fileName" -mindepth 1 | read; then #https://superuser.com/a/667100/248836
+					if [ "$clear_arg" == true ]; then
 						#echo "dir not empty"
 						rm "$f_arg"
 						echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
-					else
-						#echo "dir empty"
-						echo -e "\n\033[33;1m$f_arg will ignored due to empty extracted."; tput sgr0;
-						rmdir "$fileName"
-						if [ -e "$fileName" ]; then
-							echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
-						else
-							if [ "$verbose_arg" == true ]; then
-								echo -e "\033[33;1m$fileName"'/ removed.'; tput sgr0;
-							fi
-						fi
-						continue;
 					fi
+				else
+					#echo "dir empty"
+					echo -e "\n\033[33;1m$f_arg will ignored due to empty extracted."; tput sgr0;
+					rmdir "$fileName"
+					if [ -e "$fileName" ]; then
+						echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
+					else
+						if [ "$verbose_arg" == true ]; then
+							echo -e "\033[33;1m$fileName"'/ removed.'; tput sgr0;
+						fi
+					fi
+					continue;
 				fi
 			fi
 
