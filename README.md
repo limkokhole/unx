@@ -15,7 +15,7 @@ The name "unx" inspired by UNp, UN-tar, UNzip and eXtracts.
 
 ### Options Explanation:
     Pass -s or --stay, the default is `cd` to destination directory (last directory if multiple *) after extract, but -s will stay on original/current directory after extracted. Note that it doesn't means stay on current directory when on progress since `ar x` requires `cd`, but it means cd back to original directory on complete.
-    Pass -c or --clear, to delete source file such as .tar/.zip/.gz/.deb file. It will not clear if failed to extract.
+    Pass -c or --clear, to delete source file such as .tar/.zip/.gz/.deb file. It will not delete if failed to extract, or destination file/directory is empty.
     Pass -v or --verbose, to list parent directory of destination directory/file on progress. Also included log such as which directory is skipped(e.g. happen if run with regex *) and which file is trying.
 
 ### Options example (Basically means every possible combination of -c|-s|-v, ../full path, regex *):
