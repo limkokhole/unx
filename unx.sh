@@ -42,7 +42,7 @@ for (( j=0; j<argc; j++ )); do
 	  -v|--verbose) verbose_arg=true;;
 	  -sc|-cs) stay_arg=true; clear_arg=true;;
 	  -sv|-vs) stay_arg=true; verbose_arg=true;;
-	  -vs|-sv) clear_arg=true; verbose_arg=true;;
+	  -vc|-cv) clear_arg=true; verbose_arg=true;;
 	  -scv|-svc|-csv|-cvs|-vsc|-vcs) stay_arg=true; clear_arg=true; verbose_arg=true;;
 	  #*) ((file_argv="$file_argv"+1)) #comment out since count unused
 	esac;	
@@ -58,7 +58,7 @@ for (( j=0; j<argc; j++ )); do
 	  -v|--verbose) :;;
 	  -sc|-cs) :;;
 	  -sv|-vs) :;;
-	  -vs|-sv) :;;
+	  -vc|-cv) :;;
 	  -scv|-svc|-csv|-cvs|-vsc|-vcs) :;;
 	  *) f_arg="${argv[j]}"; 
 
