@@ -73,9 +73,9 @@ for (( j=0; j<argc; j++ )); do
 		fi
 		
 		trim_ext="${f_arg##*.}"
-		if [ "$trim_ext" == "deb" ]; then
+		if [[ "$trim_ext" == "deb" ]]; then
 			fileName="$f_arg" #.deb
-		elif [ "$trim_ext" == "iso" ]; then #safe guard bcoz unlikely user want to extract iso
+		elif [[ "$trim_ext" == "iso" ]]; then #safe guard bcoz unlikely user want to extract iso
 			#https://stackoverflow.com/a/1885534/1074998
 			if [ "$clear_arg" == true ]; then
 				echo -e "\033[31;1m "$f_arg" file will be deleted after extracted because of -c option."; 
