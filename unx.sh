@@ -189,8 +189,36 @@ for (( j=0; j<argc; j++ )); do
 			touch "$fileName" #by default untar keep timestamp with source file which is strange not able to do ls sort by time
 
 			if [ "$clear_arg" == true ]; then
-				rm "$f_arg"
-				echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
+				if [[ ( "$trim_ext" == "gz" ) && ( "$is_tar" == false) ]]; then #dest is a file
+					if [ -s "$fileName" ]; then #only delete file if dest file size greater than 0 to prevent tar xf .iso still return status 0 bug.
+						#echo got size
+						rm "$f_arg"
+						echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
+					else
+						#echo no size
+						echo -e "\n\033[33;1m$f_arg will ignore due to empty "$fileName" to prevent extract failure."; tput sgr0;
+						#will not rm any single file.
+						continue;
+					fi
+				else #dest is a directory
+					if find "$fileName" -mindepth 1 | read; then #https://superuser.com/a/667100/248836
+						#echo "dir not empty"
+						rm "$f_arg"
+						echo -e "\n\033[33;1m$f_arg deleted."; tput sgr0;
+					else
+						#echo "dir empty"
+						echo -e "\n\033[33;1m$f_arg will ignored due to empty extracted."; tput sgr0;
+						rmdir "$fileName"
+						if [ -e "$fileName" ]; then
+							echo -e "\033[31;1m$fileName"'/ failed to removed.'; tput sgr0;
+						else
+							if [ "$verbose_arg" == true ]; then
+								echo -e "\033[33;1m$fileName"'/ removed.'; tput sgr0;
+							fi
+						fi
+						continue;
+					fi
+				fi
 			fi
 
 			if [ "$verbose_arg" == true ]; then
