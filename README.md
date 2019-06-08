@@ -23,7 +23,6 @@ The name "unx" inspired by UNp, UN-tar, UNzip and eXtracts.
     unx /home/user/myArchive.tar
     unx myArchive.tar -scv
     unx *
-    unx *.iso
     unx ../*
     unx ../* -c
     unx ../* -s
