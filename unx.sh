@@ -102,6 +102,13 @@ for (( j=0; j<argc; j++ )); do
 		elif [ ! -f "$f_arg" ]; then echo -e "\033[31;1mProvided filename $f_arg is not a file type. Abort."; tput sgr0; continue;
 		fi
 
+		#Un-rar only do very simple operation without support cd bcoz I don't know good way to know the dest path(can be dir/file)
+		if [[ "$trim_ext" == "rar" ]]; then
+			unar -r "$f_arg" >/dev/null || { 
+				echo -e "\033[31;1mUn-rar "$f_arg" failed. Abort."; tput sgr0;
+				continue;
+			}
+		fi	
 
 		#handle the case of archive.tar.gz
 		trailingExtension="${fileName##*.}"
@@ -186,7 +193,7 @@ for (( j=0; j<argc; j++ )); do
 					continue;
 				}
 			elif [[ "$trim_ext" == "iso" ]]; then
-				7z x "$f_arg" -o"$fileName" >/dev/null || { 
+				7zz x "$f_arg" -o"$fileName" >/dev/null || { 
 					echo -e "\033[31;1mExtract iso "$f_arg" failed. Abort."; tput sgr0;
 					rmdir "$fileName"; #test case: touch dummy file, then try to untar it
 					if [ -e "$fileName" ]; then
