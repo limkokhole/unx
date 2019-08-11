@@ -22,7 +22,7 @@ The name "unx" inspired by UNp, UN-tar, UNzip and eXtracts.
     Pass -c or --clear, to delete source file such as .tar/.zip/.gz/.iso/.deb file. It will not delete if failed to extract, or destination file/directory is empty. Extract .iso will prompt [y/n] if this flag provided.
     Pass -v or --verbose, to list parent directory of destination directory/file on progress. Also included log such as which directory is skipped(e.g. happen if run with regex *) and which file is trying.
     
-    Un-rar only has perform basic extract with unar r which has its own syntax of incrementing directory name, --clear and -stay doesn't works on it.
+    Un-rar only performs basic extraction by unar r which has its own syntax of incrementing directory name, --clear and -stay doesn't works on it.
 
 ### Options example (Basically means every possible combination of -c|-s|-v, ../full path, regex *):
     unx myArchive.tar
