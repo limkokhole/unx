@@ -193,7 +193,7 @@ for (( j=0; j<argc; j++ )); do
 					continue;
 				}
 			elif [[ "$trim_ext" == "iso" ]]; then
-				7zz x "$f_arg" -o"$fileName" >/dev/null || { 
+				7z x "$f_arg" -o"$fileName" >/dev/null || { 
 					echo -e "\033[31;1mExtract iso "$f_arg" failed. Abort."; tput sgr0;
 					rmdir "$fileName"; #test case: touch dummy file, then try to untar it
 					if [ -e "$fileName" ]; then
