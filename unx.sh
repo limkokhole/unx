@@ -103,11 +103,21 @@ for (( j=0; j<argc; j++ )); do
 		fi
 
 		#Un-rar only do very simple operation without support cd bcoz I don't know good way to know the dest path(can be dir/file)
+		#Also currently nota able to `touch`
 		if [[ "$trim_ext" == "rar" ]]; then
-			unar -r "$f_arg" >/dev/null || { 
-				echo -e "\033[31;1mUn-rar "$f_arg" failed. Abort."; tput sgr0;
-				continue;
-			}
+			if [ "$verbose_arg" == true ]; then
+				echo -e "\n\033[36;1m.Trying $f_arg ..."; tput sgr0;
+				unar -r "$f_arg" || { #this log not consistent with other type which always dismiss the log  by /dev/null
+					echo -e "\033[31;1mUn-rar "$f_arg" failed. Abort."; tput sgr0;
+					continue;
+				}
+			else
+				unar -r "$f_arg" >/dev/null || { 
+					echo -e "\033[31;1mUn-rar "$f_arg" failed. Abort."; tput sgr0;
+					continue;
+				}
+			fi
+			continue;
 		fi	
 
 		#handle the case of archive.tar.gz
