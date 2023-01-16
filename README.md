@@ -1,5 +1,5 @@
 ### Problem
-Everytime I run command to extarct file,  I always worry some files might merged into old directory(same name) without alert which corrupt the old directory structure.
+Everytime I run command to extarct file,  I always worry some files might merged into old directory(same name) without alert which corrupt the old directory structure or lose the file tracking.
 
 # unx
 Automatically mkdir to eXtracts .iso, .zip, .gz(single file), .tgz, .tar.gz, .tar.xz, .deb, .rar, ls files, cd, remove source file, rename incrementally, touch, and with regex *
